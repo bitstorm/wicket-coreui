@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:wicket="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<wicket:header-items />
+
+<script type="text/javascript">
+
+
+$(function() {
+	var pieChart = new Chart($('#canvas-3'), {
+    type: 'pie',
+    data: {
+        labels: ['Red', 'Green', 'Yellow'],
+        datasets: [{
+            data: [300, 50, 100],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+    },
+    options: {
+        responsive: true
+    }
+  });
+});
+
+</script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<header class="app-header navbar">
+	<ul class="nav navbar-nav d-md-down-none">
+		<li class="nav-item px-3"><a class="nav-link" href="#">Dashboard</a>
+		</li>
+		<li class="nav-item px-3"><a class="nav-link" href="#">Users</a>
+		</li>
+		<li class="nav-item px-3"><a class="nav-link" href="#">Settings</a>
+		</li>
+	</ul>
+	<button class="navbar-toggler aside-menu-toggler d-md-down-none"
+		type="button" data-toggle="aside-menu-lg-show">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<button class="navbar-toggler aside-menu-toggler d-lg-none"
+		type="button" data-toggle="aside-menu-show">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+</header>
+<body class="app">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">Home</li>
+		<li class="breadcrumb-item"><a href="#">Admin</a></li>
+		<li class="breadcrumb-item active">Dashboard</li>
+
+		<li class="breadcrumb-menu d-md-down-none">
+			<div class="btn-group" role="group" aria-label="Button group">
+				<a class="btn" href="#"> <i class="icon-speech"></i>
+				</a> <a class="btn" href="./"> <i class="icon-graph"></i>
+					&nbsp;Dashboard
+				</a> <a class="btn" href="#"> <i class="icon-settings"></i>
+					&nbsp;Settings
+				</a>
+			</div>
+		</li>
+	</ol>
+	<div class="container-fluid">
+		<div class="animated fadeIn">
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+					<div class="card">
+						<div class="card-header">Card title</div>
+						<div class="card-body">Lorem ipsum dolor sit amet,
+							consectetuer adipiscing elit, sed diam nonummy nibh euismod
+							tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+							enim ad minim veniam, quis nostrud exerci tation ullamcorper
+							suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card">
+						<div class="card-body">Lorem ipsum dolor sit amet,
+							consectetuer adipiscing elit, sed diam nonummy nibh euismod
+							tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+							enim ad minim veniam, quis nostrud exerci tation ullamcorper
+							suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+						<div class="card-footer">Card footer</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card">
+						<div class="card-header">
+							<i class="fa fa-check"></i>Card with icon
+						</div>
+						<div class="card-body">Lorem ipsum dolor sit amet,
+							consectetuer adipiscing elit, sed diam nonummy nibh euismod
+							tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+							enim ad minim veniam, quis nostrud exerci tation ullamcorper
+							suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card">
+						<div class="card-header">
+							Card with switch <label
+								class="switch switch-sm switch-text switch-info float-right mb-0">
+								<input class="switch-input" type="checkbox"> <span
+								class="switch-label" data-on="On" data-off="Off"></span> <span
+								class="switch-handle"></span>
+							</label>
+						</div>
+						<div class="card-body">Lorem ipsum dolor sit amet,
+							consectetuer adipiscing elit, sed diam nonummy nibh euismod
+							tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+							enim ad minim veniam, quis nostrud exerci tation ullamcorper
+							suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card">
+						<div class="card-header">
+							Card with label <span class="badge badge-success float-right">Success</span>
+						</div>
+						<div class="card-body">Lorem ipsum dolor sit amet,
+							consectetuer adipiscing elit, sed diam nonummy nibh euismod
+							tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+							enim ad minim veniam, quis nostrud exerci tation ullamcorper
+							suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card">
+						<div class="card-header">
+							Card with label <span
+								class="badge badge-pill badge-danger float-right">42</span>
+						</div>
+						<div class="card-body">Lorem ipsum dolor sit amet,
+							consectetuer adipiscing elit, sed diam nonummy nibh euismod
+							tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+							enim ad minim veniam, quis nostrud exerci tation ullamcorper
+							suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-4">
+					<div class="card text-white bg-primary text-center">
+						<div class="card-body">
+							<blockquote class="card-bodyquote">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Integer posuere erat a ante.</p>
+								<footer>
+									Someone famous in <cite title="Source Title">Source
+										Title</cite>
+								</footer>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card text-white bg-success text-center">
+						<div class="card-body">
+							<blockquote class="card-bodyquote">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Integer posuere erat a ante.</p>
+								<footer>
+									Someone famous in <cite title="Source Title">Source
+										Title</cite>
+								</footer>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-4">
+					<div class="card text-white bg-info text-center">
+						<div class="card-body">
+							<blockquote class="card-bodyquote">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Integer posuere erat a ante.</p>
+								<footer>
+									Someone famous in <cite title="Source Title">Source
+										Title</cite>
+								</footer>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-columns cols-2">
+				<div class="card">
+					<div class="card-header">
+						Doughnut Chart
+						<div class="card-header-actions">
+							<a href="http://www.chartjs.org" class="card-header-action"
+								target="_blank"> <small class="text-muted">docs</small>
+							</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-wrapper">
+							<div
+								style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+								class="chartjs-size-monitor">
+								<div class="chartjs-size-monitor-expand"
+									style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div
+										style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+								</div>
+								<div class="chartjs-size-monitor-shrink"
+									style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div
+										style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+								</div>
+							</div>
+							<canvas id="canvas-3"
+								style="display: block; width: 739px; height: 369px;" width="739"
+								height="369" class="chartjs-render-monitor"></canvas>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						Radar Chart
+						<div class="card-header-actions">
+							<a href="http://www.chartjs.org" class="card-header-action"
+								target="_blank"> <small class="text-muted">docs</small>
+							</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="chart-wrapper">
+							<div
+								style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+								class="chartjs-size-monitor">
+								<div class="chartjs-size-monitor-expand"
+									style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div
+										style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+								</div>
+								<div class="chartjs-size-monitor-shrink"
+									style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div
+										style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+								</div>
+							</div>
+							<canvas id="canvas-4"
+								style="display: block; width: 739px; height: 369px;" width="739"
+								height="369" class="chartjs-render-monitor"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Modal title</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>One fine body…</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save
+								changes</button>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
