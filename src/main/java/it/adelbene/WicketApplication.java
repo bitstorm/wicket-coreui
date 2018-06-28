@@ -4,7 +4,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import de.agilecoders.wicket.webjars.WicketWebjars;
-import it.adelbene.ui.BasePage;
+import it.adelbene.ui.pages.BasePage;
 
 /**
  * Application object for your web application.

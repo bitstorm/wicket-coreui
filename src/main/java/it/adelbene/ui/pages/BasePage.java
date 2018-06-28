@@ -1,4 +1,4 @@
-package it.adelbene.ui;
+package it.adelbene.ui.pages;
 
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
