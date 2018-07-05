@@ -41,7 +41,7 @@ public class DubboAwsomeMonitorApp extends WebApplication
 		super.init();
 		WicketWebjars.install(this);
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("consumer.xml");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("webapp.xml");
 		context.start();
 
 		RegistryService registry = (RegistryService)context.getBean("registryService");

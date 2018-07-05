@@ -1,54 +1,32 @@
 <wicket:extend>
 
-	<h2>Blaaaaa!!</h2>
+	<h2>List of registered applications</h2>
 
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
-				<div class="card-header">
-					<i class="fa fa-align-justify"></i> Combined All Table
-				</div>
+				
 				<div class="card-body">
 					<table
 						class="table table-responsive-sm table-bordered table-striped table-sm">
 						<thead>
 							<tr>
-								<th>Username</th>
-								<th>Date registered</th>
-								<th>Role</th>
-								<th>Status</th>
+								<th>Application name</th>
+								<th>Owner</th>
+								<th>Providers</th>
+								<th>Consumers</th>
+								<th>Depends On</th>
+								<th>Used by</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Vishnu Serghei</td>
-								<td>2012/01/01</td>
-								<td>Member</td>
-								<td><span class="badge badge-success">Active</span></td>
-							</tr>
-							<tr>
-								<td>Zbyněk Phoibos</td>
-								<td>2012/02/01</td>
-								<td>Staff</td>
-								<td><span class="badge badge-danger">Banned</span></td>
-							</tr>
-							<tr>
-								<td>Einar Randall</td>
-								<td>2012/02/01</td>
-								<td>Admin</td>
-								<td><span class="badge badge-secondary">Inactive</span></td>
-							</tr>
-							<tr>
-								<td>Félix Troels</td>
-								<td>2012/03/01</td>
-								<td>Member</td>
-								<td><span class="badge badge-warning">Pending</span></td>
-							</tr>
-							<tr>
-								<td>Aulus Agmundr</td>
-								<td>2012/01/21</td>
-								<td>Staff</td>
-								<td><span class="badge badge-success">Active</span></td>
+							<tr wicket:id="rows">
+								<td wicket:id="name"></td>
+								<td wicket:id="owner"></td>
+								<td wicket:id="providerCount"></td>
+								<td wicket:id="consumerCount"></td>
+								<td wicket:id="efferentCount"></td>
+								<td wicket:id="afferentCount"></td>								
 							</tr>
 						</tbody>
 					</table>

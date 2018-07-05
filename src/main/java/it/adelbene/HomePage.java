@@ -1,35 +1,42 @@
 package it.adelbene;
 
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
-
-import com.github.openjson.JSONArray;
-import com.github.openjson.JSONObject;
-
+import it.adelbene.dubbo.domain.DubboApplication;
+import it.adelbene.ui.models.ApplicationsModel;
 import it.adelbene.ui.pages.BasePage;
-import it.adelbene.ui.resources.ChartjsHeaderItemFactory;
-import it.adelbene.utils.JSONObjectEnhanced;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 
-public class HomePage extends BasePage {
+public class HomePage extends BasePage
+{
 	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void renderHead(IHeaderResponse response) {
-		super.renderHead(response);
-		
-		JSONObject data = new JSONObjectEnhanced()
-			.putArray("labels", "Red", "Green", "Yellow")
-			.put("datasets", new JSONArray()
-				.put(new JSONObjectEnhanced()
-					.putArray("data", 300, 50, 100)
-					.putArray("backgroundColor", "#FF6384", "#36A2EB", "#FFCE56")
-					.putArray("hoverBackgroundColor", "#FF6384", "#36A2EB", "#FFCE56")
-		));
-		
-		JSONObject options = new JSONObject()
-			.put("responsive", true);
-		
-		OnDomReadyHeaderItem headerItem = ChartjsHeaderItemFactory.buildChartJs("#canvas-3", "pie", data, options);
-		response.render(headerItem);
+
+	/**
+	 * 
+	 */
+	public HomePage()
+	{
+		ApplicationsModel model = new ApplicationsModel();
+
+		add(new ListView<DubboApplication>("rows", model)
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -1505114095732809125L;
+
+			@Override
+			public void populateItem(final ListItem<DubboApplication> item)
+			{
+				DubboApplication dubboApplication = item.getModelObject();
+				item.add(new Label("name", dubboApplication.getName()));
+				item.add(new Label("owner",
+					dubboApplication.getOwner() + " " + dubboApplication.getOrganization()));
+				item.add(new Label("providerCount", dubboApplication.getProviderCount()));
+				item.add(new Label("consumerCount", dubboApplication.getConsumerCount()));
+				item.add(new Label("efferentCount", dubboApplication.getEfferentCount()));
+				item.add(new Label("afferentCount", dubboApplication.getAfferentCount()));
+			}
+		});
 	}
 }
