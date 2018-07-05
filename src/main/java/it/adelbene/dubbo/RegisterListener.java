@@ -13,6 +13,9 @@ import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
 import com.alibaba.dubbo.registry.NotifyListener;
+import it.adelbene.DubboAwsomeMonitorApp;
+import org.apache.wicket.protocol.ws.api.WebSocketPushBroadcaster;
+import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
 
 public class RegisterListener implements NotifyListener
 {
@@ -24,6 +27,18 @@ public class RegisterListener implements NotifyListener
 	private final Set<String> services = new ConcurrentHashSet<String>();
 	private final Map<String, List<URL>> serviceProviders = new ConcurrentHashMap<String, List<URL>>();
 	private final Map<String, List<URL>> serviceConsumers = new ConcurrentHashMap<String, List<URL>>();
+	private final WebSocketPushBroadcaster broadcaster;
+	private final DubboAwsomeMonitorApp webApp;
+
+	/**
+	 * @param broadcaster
+	 * @param webApp 
+	 */
+	public RegisterListener(WebSocketPushBroadcaster broadcaster, DubboAwsomeMonitorApp webApp)
+	{
+		this.broadcaster = broadcaster;
+		this.webApp = webApp;
+	}
 
 	public Set<String> getApplications()
 	{
@@ -200,8 +215,10 @@ public class RegisterListener implements NotifyListener
 		}
 		Map<String, List<URL>> proivderMap = new HashMap<String, List<URL>>();
 		Map<String, List<URL>> consumerMap = new HashMap<String, List<URL>>();
+		
 		for (URL url : urls)
 		{
+			System.out.println(url);
 			String application = url.getParameter(Constants.APPLICATION_KEY);
 			if (application != null && application.length() > 0)
 			{
@@ -272,7 +289,6 @@ public class RegisterListener implements NotifyListener
 			}
 		}
 
-
 		if (proivderMap != null && proivderMap.size() > 0)
 		{
 			serviceProviders.putAll(proivderMap);
@@ -281,5 +297,9 @@ public class RegisterListener implements NotifyListener
 		{
 			serviceConsumers.putAll(consumerMap);
 		}
+		
+		broadcaster.broadcastAll(webApp, new IWebSocketPushMessage()
+		{
+		});
 	}
 }

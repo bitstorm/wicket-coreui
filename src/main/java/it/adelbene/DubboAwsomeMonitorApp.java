@@ -10,6 +10,9 @@ import org.apache.wicket.Application;
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.ws.WebSocketSettings;
+import org.apache.wicket.protocol.ws.api.WebSocketPushBroadcaster;
+import org.apache.wicket.protocol.ws.api.registry.IWebSocketConnectionRegistry;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -21,7 +24,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DubboAwsomeMonitorApp extends WebApplication
 {
 
-	private final RegisterListener dubboListener = new RegisterListener();
+	private volatile RegisterListener dubboListener;
+	private volatile WebSocketPushBroadcaster broadcaster;
 
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
@@ -40,7 +44,23 @@ public class DubboAwsomeMonitorApp extends WebApplication
 	{
 		super.init();
 		WicketWebjars.install(this);
+		
+		initWebSocket();
 
+		initDubboListener();
+	}
+
+	private void initWebSocket()
+	{
+		WebSocketSettings webSocketSettings = WebSocketSettings.Holder.get(this);
+		IWebSocketConnectionRegistry webSocketConnectionRegistry = webSocketSettings.getConnectionRegistry();
+		broadcaster = new WebSocketPushBroadcaster (webSocketConnectionRegistry);
+	}
+
+	private void initDubboListener()
+	{
+		dubboListener = new RegisterListener(broadcaster, this);
+		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("webapp.xml");
 		context.start();
 
