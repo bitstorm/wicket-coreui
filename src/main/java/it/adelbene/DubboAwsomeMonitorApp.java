@@ -1,16 +1,16 @@
 package it.adelbene;
 
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.registry.RegistryService;
-
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import it.adelbene.dubbo.RegisterListener;
+import org.apache.wicket.Application;
+import org.apache.wicket.WicketRuntimeException;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.protocol.http.WebApplication;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Application object for your web application. If you want to run this application without
@@ -18,10 +18,10 @@ import it.adelbene.dubbo.RegisterListener;
  * 
  * @see it.adelbene.Start#main(String[])
  */
-public class WicketApplication extends WebApplication
+public class DubboAwsomeMonitorApp extends WebApplication
 {
 
-	private final RegisterListener LISTENER = new RegisterListener();
+	private final RegisterListener dubboListener = new RegisterListener();
 
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
@@ -53,11 +53,30 @@ public class WicketApplication extends WebApplication
 			Constants.PROVIDERS_CATEGORY + "," + Constants.CONSUMERS_CATEGORY, Constants.CHECK_KEY,
 			String.valueOf(false));
 
-		registry.subscribe(subscribeUrl, LISTENER);
+		registry.subscribe(subscribeUrl, dubboListener);
 	}
 
-	public RegisterListener getListener()
+	/**
+	 * @return the dubboListener
+	 */
+	public RegisterListener getDubboListener()
 	{
-		return LISTENER;
+		return dubboListener;
 	}
+
+	public static DubboAwsomeMonitorApp get()
+	{
+		Application application = Application.get();
+
+		if (application instanceof DubboAwsomeMonitorApp == false)
+		{
+			throw new WicketRuntimeException(
+				"The application attached to the current thread is not a " +
+					DubboAwsomeMonitorApp.class.getSimpleName());
+		}
+
+		return (DubboAwsomeMonitorApp)application;
+	}
+
+
 }
