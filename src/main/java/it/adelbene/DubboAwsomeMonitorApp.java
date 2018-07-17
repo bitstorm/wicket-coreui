@@ -1,11 +1,9 @@
 package it.adelbene;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.utils.NetUtils;
-import com.alibaba.dubbo.registry.RegistryService;
-import de.agilecoders.wicket.webjars.WicketWebjars;
-import it.adelbene.dubbo.RegisterListener;
+import org.apache.dubbo.common.Constants;
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.common.utils.NetUtils;
+import org.apache.dubbo.registry.RegistryService;
 import org.apache.wicket.Application;
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebPage;
@@ -14,6 +12,9 @@ import org.apache.wicket.protocol.ws.WebSocketSettings;
 import org.apache.wicket.protocol.ws.api.WebSocketPushBroadcaster;
 import org.apache.wicket.protocol.ws.api.registry.IWebSocketConnectionRegistry;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import de.agilecoders.wicket.webjars.WicketWebjars;
+import it.adelbene.dubbo.RegisterListener;
 
 /**
  * Application object for your web application. If you want to run this application without

@@ -8,10 +8,11 @@
     <dubbo:application name="consumer-of-helloworld-webapp"  />
 
     <!-- Using the multicast broadcast registry to discovery the exposed  services -->
-    <dubbo:registry address="multicast://224.5.6.7:1234" />
+    <dubbo:registry client="curator" address="multicast://224.5.6.7:1234" />
 
-    <dubbo:reference id="registryService" interface="com.alibaba.dubbo.registry.RegistryService"/>
-
+    <dubbo:reference id="registryService" interface="org.apache.dubbo.registry.RegistryService"/>
+	
+	 
     <!-- Generate a remote service proxy that can be used as demoService as local bean -->
 <!--     <dubbo:reference id="demoService" interface="it.adelbene.demo.DemoService" /> -->
 </beans>
