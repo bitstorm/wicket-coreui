@@ -26,7 +26,7 @@ public class ZkClient {
 				System.out.println(arg0);
 				
 			}
-		}).forPath("/dubbo/org.apache.dubbo.monitor.MonitorService/consumers");
+		}).forPath("/dubbo/it.adelbene.demo.DemoService/consumers");
 		
 		children.forEach(System.out::println);
 		Thread.sleep(8000);
