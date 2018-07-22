@@ -1,6 +1,6 @@
-package it.adelbene.demo.provider;
+package it.adelbene.dubbo.demo.provider;
 
-import it.adelbene.demo.DemoService;
+import it.adelbene.dubbo.demo.DemoService;
 
 public class DemoServiceImpl implements DemoService {
 

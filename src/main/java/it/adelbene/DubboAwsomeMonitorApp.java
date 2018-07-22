@@ -15,6 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import it.adelbene.dubbo.RegisterListener;
+import it.adelbene.zookeeper.DubboZkManager;
 
 /**
  * Application object for your web application. If you want to run this application without
@@ -27,6 +28,7 @@ public class DubboAwsomeMonitorApp extends WebApplication
 
 	private volatile RegisterListener dubboListener;
 	private volatile WebSocketPushBroadcaster broadcaster;
+	private DubboZkManager dubboZkManager;
 
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
@@ -47,8 +49,13 @@ public class DubboAwsomeMonitorApp extends WebApplication
 		WicketWebjars.install(this);
 		
 		initWebSocket();
-
+		initZkListener();
 		initDubboListener();
+	}
+
+	private void initZkListener()
+	{
+		dubboZkManager = new DubboZkManager();
 	}
 
 	private void initWebSocket()

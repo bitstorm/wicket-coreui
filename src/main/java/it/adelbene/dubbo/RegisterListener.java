@@ -219,7 +219,7 @@ public class RegisterListener implements NotifyListener
 		
 		for (URL url : urls)
 		{
-			System.out.println(url);
+//			System.out.println(url);
 			String application = url.getParameter(Constants.APPLICATION_KEY);
 			if (application != null && application.length() > 0)
 			{

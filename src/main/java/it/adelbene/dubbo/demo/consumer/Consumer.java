@@ -1,8 +1,8 @@
-package it.adelbene.demo.consumer;
+package it.adelbene.dubbo.demo.consumer;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import it.adelbene.demo.DemoService;
+import it.adelbene.dubbo.demo.DemoService;
 
 public class Consumer {
 	public static void main(String[] args) throws Exception {

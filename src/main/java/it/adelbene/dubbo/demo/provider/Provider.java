@@ -1,4 +1,4 @@
-package it.adelbene.demo.provider;
+package it.adelbene.dubbo.demo.provider;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
