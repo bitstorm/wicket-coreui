@@ -1,27 +1,33 @@
 package it.adelbene.zookeeper;
 
-import java.util.HashSet;
-import java.util.List;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.Set;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.api.CuratorWatcher;
-import org.apache.curator.framework.recipes.cache.PathChildrenCache;
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
+import org.apache.curator.framework.recipes.cache.TreeCache;
+import org.apache.curator.framework.recipes.cache.TreeCacheEvent;
+import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 import org.apache.curator.retry.RetryNTimes;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher.Event.EventType;
+import org.apache.dubbo.common.Constants;
+import org.apache.dubbo.common.URL;
+import org.apache.wicket.util.collections.ConcurrentHashSet;
+import org.apache.wicket.util.string.Strings;
 import org.apache.zookeeper.data.Stat;
 
 public class DubboZkManager
 {
-	private static final String ROOT_NODE = "/dubbo";
+	private static final String PROVIDERS = "providers";
+	private static final String CONSUMERS = "consumers";
+	private static final String ROOT_NODE = "dubbo";
+
 	private final CuratorFramework curator;
+	private final Set<String> services;
 
 	public DubboZkManager()
 	{
+		services = new ConcurrentHashSet<>();
 		curator = CuratorFrameworkFactory.newClient("localhost:2181", 10000, 10000,
 			new RetryNTimes(3, 3000));
 
@@ -46,69 +52,61 @@ public class DubboZkManager
 	{
 		curator.start();
 		curator.getZookeeperClient().blockUntilConnectedOrTimedOut();
+		String rootPAth = ROOT_NODE;
+		Stat stat = curator.checkExists().forPath("/" + rootPAth);
 
-		List<String> children = curator.getChildren().usingWatcher(new CuratorWatcher()
+		if (stat != null)
 		{
-			@Override
-			public void process(WatchedEvent event) throws Exception
+			TreeCache cache = new TreeCache(curator, "/" + rootPAth);
+            cache.start();
+            
+			TreeCacheListener listener = new TreeCacheListener()
 			{
-				EventType eventType = event.getType();
-				String path = event.getPath();
-
-				switch (eventType)
+				@Override
+				public void childEvent(CuratorFramework client, TreeCacheEvent event)
+					throws Exception
 				{
-					case NodeChildrenChanged :
-						loadServices(curator.getChildren().forPath(path));
-						break;
-					default :
-						break;
-				}
-
-			}
-		}).forPath(ROOT_NODE);
-
-		loadServices(children);
-	}
-
-	private void loadServices(List<String> children) throws Exception
-	{
-		Set<String> services = new HashSet<>();
-
-		services.addAll(children);
-
-		for (String service : services)
-		{
-			listChildrenUsingWatcher(ROOT_NODE + "/" + service + "/consumers");
-			listChildrenUsingWatcher(ROOT_NODE + "/" + service + "/providers");
-		}
-	}
-
-	private void listChildrenUsingWatcher(String node)
-	{
-		try
-		{
-			Stat stat = curator.checkExists().forPath(node);
-			if (stat != null)
-			{
-				PathChildrenCache pathcache = new PathChildrenCache(curator, node, true);
-
-				pathcache.getListenable().addListener(new PathChildrenCacheListener()
-				{
-					@Override
-					public void childEvent(CuratorFramework curator, PathChildrenCacheEvent event)
-						throws Exception
+					switch (event.getType())
 					{
-						List<String> children = curator.getChildren().forPath(node);
-						System.out.println(node + ": " + children.size());
+						
+						case INITIALIZED :
+							
+							break;
+						case NODE_ADDED :
+							processAddedChild(event);
+							break;
+						case NODE_REMOVED :
+							break;
+						default :
+							break;
 					}
-				});
-
-				pathcache.start();
-			}
+				}
+			};
+            cache.getListenable().addListener(listener);
 		}
-		catch (Exception e)
+	}
+
+	private void processAddedChild(TreeCacheEvent event)
+	{
+		String path = event.getData().getPath();
+		String lastPathComponent = Strings.lastPathComponent(path, '/');
+
+		if (CONSUMERS.equals(lastPathComponent) ||
+			PROVIDERS.equals(lastPathComponent))
 		{
-			throw new RuntimeException(e);
+			services.add(path);
+		}
+		else if (services.contains(Strings.beforeLastPathComponent(path, '/')))
+		{
+			String decodedUrl = URLDecoder.decode(lastPathComponent, Charset.forName("UTF-8"));
+			System.out.println(decodedUrl);
+			
+			URL url = URL.valueOf(decodedUrl);
+			String side = url.getParameter(Constants.SIDE_KEY);
+			String application = url.getParameter(Constants.APPLICATION_KEY);
+			String serviceInterface = url.getParameter(Constants.INTERFACE_KEY);
+
+			System.out.println(String.join(", ", side, application, serviceInterface));
 		}
 	}
 }
