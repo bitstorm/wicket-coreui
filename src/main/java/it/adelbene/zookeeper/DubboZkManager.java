@@ -1,7 +1,7 @@
 package it.adelbene.zookeeper;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.util.Set;
 
 import org.apache.curator.framework.CuratorFramework;
@@ -68,9 +68,7 @@ public class DubboZkManager
 				{
 					switch (event.getType())
 					{
-						
 						case INITIALIZED :
-							
 							break;
 						case NODE_ADDED :
 							processAddedChild(event);
@@ -86,7 +84,7 @@ public class DubboZkManager
 		}
 	}
 
-	private void processAddedChild(TreeCacheEvent event)
+	private void processAddedChild(TreeCacheEvent event) throws UnsupportedEncodingException
 	{
 		String path = event.getData().getPath();
 		String lastPathComponent = Strings.lastPathComponent(path, '/');
@@ -98,7 +96,7 @@ public class DubboZkManager
 		}
 		else if (services.contains(Strings.beforeLastPathComponent(path, '/')))
 		{
-			String decodedUrl = URLDecoder.decode(lastPathComponent, Charset.forName("UTF-8"));
+			String decodedUrl = URLDecoder.decode(lastPathComponent, "UTF-8");
 			System.out.println(decodedUrl);
 			
 			URL url = URL.valueOf(decodedUrl);
