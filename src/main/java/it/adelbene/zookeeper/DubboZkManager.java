@@ -2,7 +2,9 @@ package it.adelbene.zookeeper;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -16,19 +18,26 @@ import org.apache.wicket.util.collections.ConcurrentHashSet;
 import org.apache.wicket.util.string.Strings;
 import org.apache.zookeeper.data.Stat;
 
+import it.adelbene.dubbo.domain.DubboService;
+
 public class DubboZkManager
 {
+	private static final String CONSUMER = "consumer";
 	private static final String PROVIDERS = "providers";
 	private static final String CONSUMERS = "consumers";
 	private static final String ROOT_NODE = "dubbo";
 
 	private final CuratorFramework curator;
 	private final Set<String> services;
+	private final Map<String, DubboService> appServices;
+
 
 	public DubboZkManager()
 	{
-		services = new ConcurrentHashSet<>();
-		curator = CuratorFrameworkFactory.newClient("localhost:2181", 10000, 10000,
+		this.services = new ConcurrentHashSet<>();
+		this.appServices = new ConcurrentHashMap<>();
+
+		this.curator = CuratorFrameworkFactory.newClient("localhost:2181", 10000, 10000,
 			new RetryNTimes(3, 3000));
 
 		try
@@ -71,9 +80,10 @@ public class DubboZkManager
 						case INITIALIZED :
 							break;
 						case NODE_ADDED :
-							processAddedChild(event);
+							processChild(event, true);
 							break;
 						case NODE_REMOVED :
+							processChild(event, false);
 							break;
 						default :
 							break;
@@ -84,7 +94,7 @@ public class DubboZkManager
 		}
 	}
 
-	private void processAddedChild(TreeCacheEvent event) throws UnsupportedEncodingException
+	private void processChild(TreeCacheEvent event, boolean addOrRemove) throws UnsupportedEncodingException
 	{
 		String path = event.getData().getPath();
 		String lastPathComponent = Strings.lastPathComponent(path, '/');
@@ -92,19 +102,71 @@ public class DubboZkManager
 		if (CONSUMERS.equals(lastPathComponent) ||
 			PROVIDERS.equals(lastPathComponent))
 		{
-			services.add(path);
+			addOrRemoveService(path, addOrRemove);
 		}
 		else if (services.contains(Strings.beforeLastPathComponent(path, '/')))
 		{
 			String decodedUrl = URLDecoder.decode(lastPathComponent, "UTF-8");
-			System.out.println(decodedUrl);
 			
 			URL url = URL.valueOf(decodedUrl);
-			String side = url.getParameter(Constants.SIDE_KEY);
-			String application = url.getParameter(Constants.APPLICATION_KEY);
-			String serviceInterface = url.getParameter(Constants.INTERFACE_KEY);
+			addOrRemoveAppService(url, addOrRemove);
 
-			System.out.println(String.join(", ", side, application, serviceInterface));
+		}
+		
+		appServices.forEach((key, value) -> System.out.println(value));
+	}
+
+	private void addOrRemoveAppService(URL url, boolean addOrRemove)
+	{
+		String side = url.getParameter(Constants.SIDE_KEY);
+		String application = url.getParameter(Constants.APPLICATION_KEY);
+		String serviceInterface = url.getParameter(Constants.INTERFACE_KEY);
+
+		if (Strings.isEmpty(application) || Strings.isEmpty(side))
+		{
+			return;
+		}
+
+		boolean isConsumer = CONSUMER.equals(side);
+
+		if (addOrRemove)
+		{
+			DubboService service = appServices.computeIfAbsent(application,
+				(interfaceName) -> new DubboService(serviceInterface, application));
+			
+			if (isConsumer)
+			{
+				service.increaseConsumersCount();
+			}
+			else
+			{
+				service.increaseProvidersCount();
+			}
+		}
+		else
+		{
+			DubboService service = appServices.get(serviceInterface);
+
+			if (isConsumer)
+			{
+				service.decreaseConsumersCount();
+			}
+			else
+			{
+				service.decreaseProvidersCount();
+			}
+		}
+	}
+
+	private void addOrRemoveService(String path, boolean addOrRemove)
+	{
+		if (addOrRemove)
+		{
+			services.add(path);
+		}
+		else
+		{
+			services.remove(path);
 		}
 	}
 }

@@ -22,60 +22,111 @@ import java.io.Serializable;
  *
  * @author Jinkai.Ma
  */
-public class DubboService implements Serializable {
+public class DubboService implements Serializable
+{
 
-    private String name;
-    private String application;
-    private String organization;
-    private String owner;
-    private int providerCount;
-    private int consumerCount;
+	private String name;
+	private String application;
+	private String organization;
+	private String owner;
+	private int providerCount;
+	private int consumerCount;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public DubboService(String name, String application)
+	{
+		super();
+		this.name = name;
+		this.application = application;
+	}
 
-    public String getApplication() {
-        return application;
-    }
+	public String getName()
+	{
+		return name;
+	}
 
-    public void setApplication(String application) {
-        this.application = application;
-    }
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
-    public String getOrganization() {
-        return organization;
-    }
+	public String getApplication()
+	{
+		return application;
+	}
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
-    }
+	public void setApplication(String application)
+	{
+		this.application = application;
+	}
 
-    public String getOwner() {
-        return owner;
-    }
+	public String getOrganization()
+	{
+		return organization;
+	}
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
+	public void setOrganization(String organization)
+	{
+		this.organization = organization;
+	}
 
-    public int getProviderCount() {
-        return providerCount;
-    }
+	public String getOwner()
+	{
+		return owner;
+	}
 
-    public void setProviderCount(int providerCount) {
-        this.providerCount = providerCount;
-    }
+	public void setOwner(String owner)
+	{
+		this.owner = owner;
+	}
 
-    public int getConsumerCount() {
-        return consumerCount;
-    }
+	public int getProviderCount()
+	{
+		return providerCount;
+	}
 
-    public void setConsumerCount(int consumerCount) {
-        this.consumerCount = consumerCount;
-    }
+	public void setProviderCount(int providerCount)
+	{
+		this.providerCount = providerCount;
+	}
+
+	public int getConsumerCount()
+	{
+		return consumerCount;
+	}
+
+	public void setConsumerCount(int consumerCount)
+	{
+		this.consumerCount = consumerCount;
+	}
+
+	public int increaseConsumersCount()
+	{
+		return ++consumerCount;
+	}
+
+	public int increaseProvidersCount()
+	{
+		return ++providerCount;
+	}
+
+	public int decreaseConsumersCount()
+	{
+		return --consumerCount;
+	}
+
+	public int decreaseProvidersCount()
+	{
+		return --providerCount;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "DubboService [name=" + name + ", application=" + application + ", organization=" +
+			organization + ", owner=" + owner + ", providerCount=" + providerCount +
+			", consumerCount=" + consumerCount + "]";
+	}
+
+
 }

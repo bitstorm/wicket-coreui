@@ -50,7 +50,7 @@ public class DubboAwsomeMonitorApp extends WebApplication
 		
 		initWebSocket();
 		initZkListener();
-		initDubboListener();
+// initDubboListener();
 	}
 
 	private void initZkListener()
