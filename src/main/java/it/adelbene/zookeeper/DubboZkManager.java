@@ -112,7 +112,7 @@ public class DubboZkManager
 			addOrRemoveAppService(url, addOrRemove);
 
 		}
-		
+		System.out.println(path);
 		appServices.forEach((key, value) -> System.out.println(value));
 	}
 
@@ -168,5 +168,10 @@ public class DubboZkManager
 		{
 			services.remove(path);
 		}
+	}
+
+	public Map<String, DubboService> getAppServices()
+	{
+		return appServices;
 	}
 }

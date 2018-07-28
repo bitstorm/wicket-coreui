@@ -1,9 +1,5 @@
 package it.adelbene;
 
-import org.apache.dubbo.common.Constants;
-import org.apache.dubbo.common.URL;
-import org.apache.dubbo.common.utils.NetUtils;
-import org.apache.dubbo.registry.RegistryService;
 import org.apache.wicket.Application;
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebPage;
@@ -11,10 +7,8 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.ws.WebSocketSettings;
 import org.apache.wicket.protocol.ws.api.WebSocketPushBroadcaster;
 import org.apache.wicket.protocol.ws.api.registry.IWebSocketConnectionRegistry;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import de.agilecoders.wicket.webjars.WicketWebjars;
-import it.adelbene.dubbo.RegisterListener;
 import it.adelbene.zookeeper.DubboZkManager;
 
 /**
@@ -26,9 +20,8 @@ import it.adelbene.zookeeper.DubboZkManager;
 public class DubboAwsomeMonitorApp extends WebApplication
 {
 
-	private volatile RegisterListener dubboListener;
 	private volatile WebSocketPushBroadcaster broadcaster;
-	private DubboZkManager dubboZkManager;
+	private volatile DubboZkManager dubboZkManager;
 
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
@@ -50,7 +43,6 @@ public class DubboAwsomeMonitorApp extends WebApplication
 		
 		initWebSocket();
 		initZkListener();
-// initDubboListener();
 	}
 
 	private void initZkListener()
@@ -63,33 +55,6 @@ public class DubboAwsomeMonitorApp extends WebApplication
 		WebSocketSettings webSocketSettings = WebSocketSettings.Holder.get(this);
 		IWebSocketConnectionRegistry webSocketConnectionRegistry = webSocketSettings.getConnectionRegistry();
 		broadcaster = new WebSocketPushBroadcaster (webSocketConnectionRegistry);
-	}
-
-	private void initDubboListener()
-	{
-		dubboListener = new RegisterListener(broadcaster, this);
-		
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("webapp.xml");
-		context.start();
-
-		RegistryService registry = (RegistryService)context.getBean("registryService");
-
-		URL subscribeUrl = new URL(Constants.ADMIN_PROTOCOL, NetUtils.getLocalHost(), 0, "",
-			Constants.INTERFACE_KEY, Constants.ANY_VALUE, Constants.GROUP_KEY, Constants.ANY_VALUE,
-			Constants.VERSION_KEY, Constants.ANY_VALUE, Constants.CLASSIFIER_KEY,
-			Constants.ANY_VALUE, Constants.CATEGORY_KEY,
-			Constants.PROVIDERS_CATEGORY + "," + Constants.CONSUMERS_CATEGORY, Constants.CHECK_KEY,
-			String.valueOf(false));
-
-		registry.subscribe(subscribeUrl, dubboListener);
-	}
-
-	/**
-	 * @return the dubboListener
-	 */
-	public RegisterListener getDubboListener()
-	{
-		return dubboListener;
 	}
 
 	public static DubboAwsomeMonitorApp get()
@@ -106,5 +71,8 @@ public class DubboAwsomeMonitorApp extends WebApplication
 		return (DubboAwsomeMonitorApp)application;
 	}
 
-
+	public DubboZkManager getDubboZkManager()
+	{
+		return dubboZkManager;
+	}
 }
