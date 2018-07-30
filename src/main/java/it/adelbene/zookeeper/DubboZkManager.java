@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import it.adelbene.dubbo.domain.DubboService;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.TreeCache;
@@ -17,8 +18,6 @@ import org.apache.dubbo.common.URL;
 import org.apache.wicket.util.collections.ConcurrentHashSet;
 import org.apache.wicket.util.string.Strings;
 import org.apache.zookeeper.data.Stat;
-
-import it.adelbene.dubbo.domain.DubboService;
 
 public class DubboZkManager
 {
@@ -131,7 +130,7 @@ public class DubboZkManager
 
 		if (addOrRemove)
 		{
-			DubboService service = appServices.computeIfAbsent(application,
+			DubboService service = appServices.computeIfAbsent(serviceInterface,
 				(interfaceName) -> new DubboService(serviceInterface, application));
 			
 			if (isConsumer)

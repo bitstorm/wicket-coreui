@@ -15,7 +15,7 @@ public class WebSocketInitializer implements ServletContainerInitializer
 	{
 		ServerContainer wsContainer = (ServerContainer)ctx
 			.getAttribute("javax.websocket.server.ServerContainer");
-		// wsContainer.setDefaultMaxSessionIdleTimeout(3600000);
+		wsContainer.setDefaultMaxSessionIdleTimeout(3600000);
 	}
 
 }
