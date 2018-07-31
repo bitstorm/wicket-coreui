@@ -1,5 +1,7 @@
 package it.adelbene;
 
+import de.agilecoders.wicket.webjars.WicketWebjars;
+import it.adelbene.zookeeper.DubboZkManager;
 import org.apache.wicket.Application;
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebPage;
@@ -7,9 +9,6 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.ws.WebSocketSettings;
 import org.apache.wicket.protocol.ws.api.WebSocketPushBroadcaster;
 import org.apache.wicket.protocol.ws.api.registry.IWebSocketConnectionRegistry;
-
-import de.agilecoders.wicket.webjars.WicketWebjars;
-import it.adelbene.zookeeper.DubboZkManager;
 
 /**
  * Application object for your web application. If you want to run this application without
@@ -47,7 +46,7 @@ public class DubboAwsomeMonitorApp extends WebApplication
 
 	private void initZkListener()
 	{
-		dubboZkManager = new DubboZkManager();
+		dubboZkManager = new DubboZkManager(this, broadcaster);
 	}
 
 	private void initWebSocket()

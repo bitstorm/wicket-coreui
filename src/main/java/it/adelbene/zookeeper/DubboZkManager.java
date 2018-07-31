@@ -5,7 +5,9 @@ import java.net.URLDecoder;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
 
+import it.adelbene.DubboAwsomeMonitorApp;
 import it.adelbene.dubbo.domain.DubboService;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -15,6 +17,8 @@ import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.dubbo.common.Constants;
 import org.apache.dubbo.common.URL;
+import org.apache.wicket.Application;
+import org.apache.wicket.protocol.ws.api.WebSocketPushBroadcaster;
 import org.apache.wicket.util.collections.ConcurrentHashSet;
 import org.apache.wicket.util.string.Strings;
 import org.apache.zookeeper.data.Stat;
@@ -29,10 +33,14 @@ public class DubboZkManager
 	private final CuratorFramework curator;
 	private final Set<String> services;
 	private final Map<String, DubboService> appServices;
+	private final WebSocketPushBroadcaster broadcaster;
+	private final Application application;
 
 
-	public DubboZkManager()
+	public DubboZkManager(DubboAwsomeMonitorApp application, WebSocketPushBroadcaster broadcaster)
 	{
+		this.application = application;
+		this.broadcaster = broadcaster;
 		this.services = new ConcurrentHashSet<>();
 		this.appServices = new ConcurrentHashMap<>();
 
@@ -65,6 +73,7 @@ public class DubboZkManager
 
 		if (stat != null)
 		{
+			CountDownLatch wait4Initialization = new CountDownLatch(1);
 			TreeCache cache = new TreeCache(curator, "/" + rootPAth);
             cache.start();
             
@@ -77,6 +86,7 @@ public class DubboZkManager
 					switch (event.getType())
 					{
 						case INITIALIZED :
+							wait4Initialization.countDown();
 							break;
 						case NODE_ADDED :
 							processChild(event, true);
@@ -90,6 +100,7 @@ public class DubboZkManager
 				}
 			};
             cache.getListenable().addListener(listener);
+            wait4Initialization.await();
 		}
 	}
 
@@ -109,6 +120,8 @@ public class DubboZkManager
 			
 			URL url = URL.valueOf(decodedUrl);
 			addOrRemoveAppService(url, addOrRemove);
+				
+			broadcaster.broadcastAll(application, new NewAppServiceMsg());
 
 		}
 		System.out.println(path);
