@@ -16,6 +16,7 @@
 package it.adelbene.dubbo.domain;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * DubboService
@@ -31,11 +32,19 @@ public class DubboService implements Serializable
 	private String owner;
 	private int providerCount;
 	private int consumerCount;
+	private final UUID id; 
 
-
+	/**
+	 * 
+	 */
+	public DubboService()
+	{
+		id = UUID.randomUUID();
+	}
+	
 	public DubboService(String name, String application)
 	{
-		super();
+		this();
 		this.name = name;
 		this.application = application;
 	}
