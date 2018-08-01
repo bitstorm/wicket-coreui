@@ -1,8 +1,5 @@
 package it.adelbene;
 
-import it.adelbene.dubbo.domain.DubboService;
-import it.adelbene.ui.models.ApplicationsModel;
-import it.adelbene.ui.pages.BasePage;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -10,6 +7,10 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.protocol.ws.api.WebSocketBehavior;
 import org.apache.wicket.protocol.ws.api.WebSocketRequestHandler;
 import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
+
+import it.adelbene.dubbo.domain.DubboService;
+import it.adelbene.ui.models.ApplicationsModel;
+import it.adelbene.ui.pages.BasePage;
 
 public class HomePage extends BasePage
 {
@@ -54,6 +55,8 @@ public class HomePage extends BasePage
 				item.add(new Label("application", dubboservice.getApplication()));
 				item.add(new Label("providerCount", dubboservice.getProviderCount()));
 				item.add(new Label("consumerCount", dubboservice.getConsumerCount()));
+
+				item.setMarkupId(dubboservice.getId().toString());
 			}
 		});
 		

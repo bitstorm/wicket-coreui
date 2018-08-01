@@ -1,10 +1,23 @@
 <wicket:extend>
 	<wicket:head>
 		<script type="text/javascript">
-			function addTableRow(cellsData) {
+			function addTableRow(rowId, cellsData) {
 				var table = document.getElementById('listServices');
 				var rowCount = table.rows.length;
 				var row = table.insertRow(rowCount);
+				
+				row.id = rowId;
+				
+				cellsData.forEach(function(element) {
+					var cell = row.insertCell(0);
+					cell.innerHTML = element;
+				});
+			}
+			
+			function updateConsumers(rowId, newValue) {
+				var row = document.getElementById(rowId);
+				var cell = row.cells[3];
+				cell.innerHTML = newValue;
 			}
 		</script>
 	</wicket:head>

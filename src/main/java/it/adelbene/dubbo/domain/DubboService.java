@@ -137,5 +137,10 @@ public class DubboService implements Serializable
 			", consumerCount=" + consumerCount + "]";
 	}
 
+	public UUID getId()
+	{
+		return id;
+	}
+
 
 }
