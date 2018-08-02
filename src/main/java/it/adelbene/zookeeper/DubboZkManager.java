@@ -35,6 +35,7 @@ public class DubboZkManager
 	private final Map<String, DubboService> appServices;
 	private final WebSocketPushBroadcaster broadcaster;
 	private final Application application;
+	private final CountDownLatch wait4Initialization = new CountDownLatch(1);
 
 
 	public DubboZkManager(DubboAwsomeMonitorApp application, WebSocketPushBroadcaster broadcaster)
@@ -73,7 +74,6 @@ public class DubboZkManager
 
 		if (stat != null)
 		{
-			CountDownLatch wait4Initialization = new CountDownLatch(1);
 			TreeCache cache = new TreeCache(curator, "/" + rootPAth);
             cache.start();
             
@@ -119,16 +119,27 @@ public class DubboZkManager
 			String decodedUrl = URLDecoder.decode(lastPathComponent, "UTF-8");
 			
 			URL url = URL.valueOf(decodedUrl);
-			addOrRemoveAppService(url, addOrRemove);
-				
-			broadcaster.broadcastAll(application, new NewAppServiceMsg());
-
+			DubboService service = addOrRemoveAppService(url, addOrRemove);
+			broadCastMessage(service);
 		}
-		System.out.println(path);
+		
 		appServices.forEach((key, value) -> System.out.println(value));
 	}
 
-	private void addOrRemoveAppService(URL url, boolean addOrRemove)
+	/**
+	 * @param service
+	 * @param application2
+	 */
+	private void broadCastMessage(DubboService service)
+	{
+		if (service == null || wait4Initialization.getCount() > 0)
+		{
+			return;
+		}
+		broadcaster.broadcastAll(application, new NewAppServiceMsg(service));
+	}
+
+	private DubboService addOrRemoveAppService(URL url, boolean addOrRemove)
 	{
 		String side = url.getParameter(Constants.SIDE_KEY);
 		String application = url.getParameter(Constants.APPLICATION_KEY);
@@ -136,14 +147,16 @@ public class DubboZkManager
 
 		if (Strings.isEmpty(application) || Strings.isEmpty(side))
 		{
-			return;
+			return null;
 		}
 
+		DubboService service = null;
+		
 		boolean isConsumer = CONSUMER.equals(side);
 
 		if (addOrRemove)
 		{
-			DubboService service = appServices.computeIfAbsent(serviceInterface,
+			service = appServices.computeIfAbsent(serviceInterface,
 				(interfaceName) -> new DubboService(serviceInterface, application));
 			
 			if (isConsumer)
@@ -157,7 +170,7 @@ public class DubboZkManager
 		}
 		else
 		{
-			DubboService service = appServices.get(serviceInterface);
+			service = appServices.get(serviceInterface);
 
 			if (isConsumer)
 			{
@@ -168,6 +181,8 @@ public class DubboZkManager
 				service.decreaseProvidersCount();
 			}
 		}
+		
+		return service;
 	}
 
 	private void addOrRemoveService(String path, boolean addOrRemove)

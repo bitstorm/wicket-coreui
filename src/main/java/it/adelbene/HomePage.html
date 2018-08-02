@@ -1,6 +1,18 @@
 <wicket:extend>
 	<wicket:head>
 		<script type="text/javascript">
+			
+			function addOrUpdateTableRow(rowId, cellsData) {
+				var row = document.getElementById(rowId);
+				
+				if (row) {
+					updateTableRow(rowId, cellsData[2], cellsData[3]);
+					return;
+				}
+				
+				addTableRow(rowId, cellsData);
+			}
+		
 			function addTableRow(rowId, cellsData) {
 				var table = document.getElementById('listServices');
 				var rowCount = table.rows.length;
@@ -9,15 +21,18 @@
 				row.id = rowId;
 				
 				cellsData.forEach(function(element) {
-					var cell = row.insertCell(0);
+					var cell = row.insertCell(row.cells.length);
 					cell.innerHTML = element;
 				});
 			}
 			
-			function updateConsumers(rowId, newValue) {
+			function updateTableRow(rowId, providers, consumers) {
 				var row = document.getElementById(rowId);
+				var cell = row.cells[2];
+				cell.innerHTML = providers;
+				
 				var cell = row.cells[3];
-				cell.innerHTML = newValue;
+				cell.innerHTML = consumers;
 			}
 		</script>
 	</wicket:head>
