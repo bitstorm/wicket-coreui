@@ -9,349 +9,184 @@
 
 </head>
 <body class="app">
-	<header class="app-header navbar">
-		<button class="navbar-toggler sidebar-toggler d-md-down-none"
-			type="button" data-toggle="sidebar-lg-show">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<ul class="nav navbar-nav d-md-down-none">
-			<li class="nav-item px-3"><a class="nav-link" href="#">Dashboard</a>
-			</li>
-			<li class="nav-item px-3"><a class="nav-link" href="#">Users</a>
-			</li>
-			<li class="nav-item px-3"><a class="nav-link" href="#">Settings</a>
-			</li>
-		</ul>
-		<ul class="nav navbar-nav ml-auto">
-			<li class="nav-item dropdown d-md-down-none">
-			</li>
-		</ul>
-	</header>
-	<div class="app-body">
-		<div class="sidebar">
-			<nav class="sidebar-nav ps ps--active-y">
-				<ul class="nav">
-					<li class="nav-item"><a class="nav-link active"
-						href="main.html"> <i class="nav-icon icon-speedometer"></i>
-							Dashboard <span class="badge badge-info">NEW</span>
-					</a></li>
-					<li class="nav-title">Theme</li>
-					<li class="nav-item"><a class="nav-link" href="colors.html">
-							<i class="nav-icon icon-drop"></i> Colors
-					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="typography.html"> <i class="nav-icon icon-pencil"></i>
-							Typography
-					</a></li>
-					<li class="nav-title">Components</li>
-					<li class="nav-item nav-dropdown"><a
-						class="nav-link nav-dropdown-toggle" href="#"> <i
-							class="nav-icon icon-puzzle"></i> Base
-					</a>
-						<ul class="nav-dropdown-items">
-							<li class="nav-item"><a class="nav-link"
-								href="base/breadcrumb.html"> <i class="nav-icon icon-puzzle"></i>
-									Breadcrumb
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/cards.html"> <i class="nav-icon icon-puzzle"></i>
-									Cards
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/carousel.html"> <i class="nav-icon icon-puzzle"></i>
-									Carousel
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/collapse.html"> <i class="nav-icon icon-puzzle"></i>
-									Collapse
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/jumbotron.html"> <i class="nav-icon icon-puzzle"></i>
-									Jumbotron
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/list-group.html"> <i class="nav-icon icon-puzzle"></i>
-									List group
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/navs.html"> <i class="nav-icon icon-puzzle"></i>
-									Navs
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/pagination.html"> <i class="nav-icon icon-puzzle"></i>
-									Pagination
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/popovers.html"> <i class="nav-icon icon-puzzle"></i>
-									Popovers
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/progress.html"> <i class="nav-icon icon-puzzle"></i>
-									Progress
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/scrollspy.html"> <i class="nav-icon icon-puzzle"></i>
-									Scrollspy
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/switches.html"> <i class="nav-icon icon-puzzle"></i>
-									Switches
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/tabs.html"> <i class="nav-icon icon-puzzle"></i>
-									Tabs
-							</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="base/tooltips.html"> <i class="nav-icon icon-puzzle"></i>
-									Tooltips
-							</a></li>
-						</ul></li>
-				</ul>
-			</nav>
-		</div>
-		<main class="main">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">Home</li>
-				<li class="breadcrumb-item"><a href="#">Admin</a></li>
-				<li class="breadcrumb-item active">Dashboard</li>
-	
-				<li class="breadcrumb-menu d-md-down-none">
-					<div class="btn-group" role="group" aria-label="Button group">
-						<a class="btn" href="#"> <i class="icon-speech"></i>
-						</a> <a class="btn" href="./"> <i class="icon-graph"></i>
-							&nbsp;Dashboard
-						</a> <a class="btn" href="#"> <i class="icon-settings"></i>
-							&nbsp;Settings
-						</a>
-					</div>
-				</li>
-			</ol>
-			<div class="container-fluid">
-			<div class="animated fadeIn">
-				<wicket:child/>
-				<wicket:remove>
-					<div class="row">
-						<div class="col-sm-6 col-md-4">
-							<div class="card">
-								<div class="card-header">Card title</div>
-								<div class="card-body">Lorem ipsum dolor sit amet,
-									consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-									enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card">
-								<div class="card-body">Lorem ipsum dolor sit amet,
-									consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-									enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-								<div class="card-footer">Card footer</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card">
-								<div class="card-header">
-									<i class="fa fa-check"></i>Card with icon
-								</div>
-								<div class="card-body">Lorem ipsum dolor sit amet,
-									consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-									enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card">
-								<div class="card-header">
-									Card with switch <label
-										class="switch switch-sm switch-text switch-info float-right mb-0">
-										<input class="switch-input" type="checkbox"> <span
-										class="switch-label" data-on="On" data-off="Off"></span> <span
-										class="switch-handle"></span>
-									</label>
-								</div>
-								<div class="card-body">Lorem ipsum dolor sit amet,
-									consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-									enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card">
-								<div class="card-header">
-									Card with label <span class="badge badge-success float-right">Success</span>
-								</div>
-								<div class="card-body">Lorem ipsum dolor sit amet,
-									consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-									enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card">
-								<div class="card-header">
-									Card with label <span
-										class="badge badge-pill badge-danger float-right">42</span>
-								</div>
-								<div class="card-body">Lorem ipsum dolor sit amet,
-									consectetuer adipiscing elit, sed diam nonummy nibh euismod
-									tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
-									enim ad minim veniam, quis nostrud exerci tation ullamcorper
-									suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-							</div>
-						</div>
-	
-					</div>
-					<div class="row">
-						<div class="col-sm-6 col-md-4">
-							<div class="card text-white bg-primary text-center">
-								<div class="card-body">
-									<blockquote class="card-bodyquote">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Integer posuere erat a ante.</p>
-										<footer>
-											Someone famous in <cite title="Source Title">Source
-												Title</cite>
-										</footer>
-									</blockquote>
-								</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card text-white bg-success text-center">
-								<div class="card-body">
-									<blockquote class="card-bodyquote">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Integer posuere erat a ante.</p>
-										<footer>
-											Someone famous in <cite title="Source Title">Source
-												Title</cite>
-										</footer>
-									</blockquote>
-								</div>
-							</div>
-						</div>
-	
-						<div class="col-sm-6 col-md-4">
-							<div class="card text-white bg-info text-center">
-								<div class="card-body">
-									<blockquote class="card-bodyquote">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Integer posuere erat a ante.</p>
-										<footer>
-											Someone famous in <cite title="Source Title">Source
-												Title</cite>
-										</footer>
-									</blockquote>
-								</div>
-							</div>
-						</div>
-					</div>
-	
-					<div class="card-columns cols-2">
-						<div class="card">
-							<div class="card-header">
-								Doughnut Chart
-								<div class="card-header-actions">
-									<a href="http://www.chartjs.org" class="card-header-action"
-										target="_blank"> <small class="text-muted">docs</small>
-									</a>
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="chart-wrapper">
-									<div
-										style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
-										class="chartjs-size-monitor">
-										<div class="chartjs-size-monitor-expand"
-											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-											<div
-												style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-										</div>
-										<div class="chartjs-size-monitor-shrink"
-											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-											<div
-												style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-										</div>
-									</div>
-									<canvas id="canvas-3"
-										style="display: block; width: 739px; height: 369px;"
-										width="739" height="369" class="chartjs-render-monitor"></canvas>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								Radar Chart
-								<div class="card-header-actions">
-									<a href="http://www.chartjs.org" class="card-header-action"
-										target="_blank"> <small class="text-muted">docs</small>
-									</a>
-								</div>
-							</div>
-							<div class="card-body">
-								<div class="chart-wrapper">
-									<div
-										style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
-										class="chartjs-size-monitor">
-										<div class="chartjs-size-monitor-expand"
-											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-											<div
-												style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-										</div>
-										<div class="chartjs-size-monitor-shrink"
-											style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-											<div
-												style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-										</div>
-									</div>
-									<canvas id="canvas-4"
-										style="display: block; width: 739px; height: 369px;"
-										width="739" height="369" class="chartjs-render-monitor"></canvas>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title">Modal title</h4>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<p>One fine body…</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save
-									changes</button>
-							</div>
-						</div>
+	<div id="wrapper">
 
-					</div>
-
-				</div>
-				</wicket:remove>
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">SB Admin</a>
 			</div>
+			<!-- Top Menu Items -->
+			<ul class="nav navbar-right top-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
+						class="caret"></b></a>
+					<ul class="dropdown-menu message-dropdown">
+						<li class="message-preview"><a href="#">
+								<div class="media">
+									<span class="pull-left"> <img class="media-object"
+										src="http://placehold.it/50x50" alt="">
+									</span>
+									<div class="media-body">
+										<h5 class="media-heading">
+											<strong>John Smith</strong>
+										</h5>
+										<p class="small text-muted">
+											<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
+										</p>
+										<p>Lorem ipsum dolor sit amet, consectetur...</p>
+									</div>
+								</div>
+						</a></li>
+						<li class="message-preview"><a href="#">
+								<div class="media">
+									<span class="pull-left"> <img class="media-object"
+										src="http://placehold.it/50x50" alt="">
+									</span>
+									<div class="media-body">
+										<h5 class="media-heading">
+											<strong>John Smith</strong>
+										</h5>
+										<p class="small text-muted">
+											<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
+										</p>
+										<p>Lorem ipsum dolor sit amet, consectetur...</p>
+									</div>
+								</div>
+						</a></li>
+						<li class="message-preview"><a href="#">
+								<div class="media">
+									<span class="pull-left"> <img class="media-object"
+										src="http://placehold.it/50x50" alt="">
+									</span>
+									<div class="media-body">
+										<h5 class="media-heading">
+											<strong>John Smith</strong>
+										</h5>
+										<p class="small text-muted">
+											<i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
+										</p>
+										<p>Lorem ipsum dolor sit amet, consectetur...</p>
+									</div>
+								</div>
+						</a></li>
+						<li class="message-footer"><a href="#">Read All New
+								Messages</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><i class="fa fa-bell"></i> <b
+						class="caret"></b></a>
+					<ul class="dropdown-menu alert-dropdown">
+						<li><a href="#">Alert Name <span
+								class="label label-default">Alert Badge</span></a></li>
+						<li><a href="#">Alert Name <span
+								class="label label-primary">Alert Badge</span></a></li>
+						<li><a href="#">Alert Name <span
+								class="label label-success">Alert Badge</span></a></li>
+						<li><a href="#">Alert Name <span class="label label-info">Alert
+									Badge</span></a></li>
+						<li><a href="#">Alert Name <span
+								class="label label-warning">Alert Badge</span></a></li>
+						<li><a href="#">Alert Name <span
+								class="label label-danger">Alert Badge</span></a></li>
+						<li class="divider"></li>
+						<li><a href="#">View All</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+						class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+						</li>
+						<li><a href="#"><i class="fa fa-fw fa-envelope"></i>
+								Inbox</a></li>
+						<li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="fa fa-fw fa-power-off"></i> Log
+								Out</a></li>
+					</ul></li>
+			</ul>
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li class="active"><a href="index.html"><i
+							class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+					<li><a href="charts.html"><i
+							class="fa fa-fw fa-bar-chart-o"></i> Charts</a></li>
+					<li><a href="tables.html"><i class="fa fa-fw fa-table"></i>
+							Tables</a></li>
+					<li><a href="forms.html"><i class="fa fa-fw fa-edit"></i>
+							Forms</a></li>
+					<li><a href="bootstrap-elements.html"><i
+							class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a></li>
+					<li><a href="bootstrap-grid.html"><i
+							class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a></li>
+					<li><a href="javascript:;" data-toggle="collapse"
+						data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>
+							Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="demo" class="collapse">
+							<li><a href="#">Dropdown Item</a></li>
+							<li><a href="#">Dropdown Item</a></li>
+						</ul></li>
+					<li><a href="blank-page.html"><i class="fa fa-fw fa-file"></i>
+							Blank Page</a></li>
+					<li><a href="index-rtl.html"><i
+							class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+
+		<div id="page-wrapper">
+
+			<div class="container-fluid">
+
+				<!-- Page Heading -->
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header">
+							Dashboard <small>Statistics Overview</small>
+						</h1>
+						<ol class="breadcrumb">
+							<li class="active"><i class="fa fa-dashboard"></i> Dashboard
+							</li>
+						</ol>
+					</div>
+				</div>
+				<!-- /.row -->
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="alert alert-info alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-hidden="true">&times;</button>
+							<i class="fa fa-info-circle"></i> <strong>Like SB Admin?</strong>
+							Try out <a
+								href="http://startbootstrap.com/template-overviews/sb-admin-2"
+								class="alert-link">SB Admin 2</a> for additional features!
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+				<div class="row">
+
+					<wicket:child />
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- /#page-wrapper -->
+
 		</div>
-		</main>
-	</div>
+		</div>
+	
 </body>
 </html>
