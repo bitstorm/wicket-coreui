@@ -6,7 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <wicket:header-items />
+<style type="text/css">
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
 
+#wrapper {
+	height: 100%;
+}
+
+#page-wrapper {
+	min-height: 100%;
+}
+</style>
 </head>
 <body class="app">
 	<div id="wrapper">
@@ -22,6 +35,10 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="index.html">SB Admin</a>
+				<button class="btn btn-link btn-sm navbar-brand"
+					id="sidebarToggle" href="#" onclick="$('#left-menu').toggle()">
+					<i class="fa fa-bars"></i>
+				</button>
 			</div>
 			<!-- Top Menu Items -->
 			<ul class="nav navbar-right top-nav">
@@ -116,7 +133,7 @@
 			</ul>
 			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav side-nav">
+				<ul id="left-menu" class="nav navbar-nav side-nav">
 					<li class="active"><a href="index.html"><i
 							class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
 					<li><a href="charts.html"><i
@@ -186,7 +203,7 @@
 			<!-- /#page-wrapper -->
 
 		</div>
-		</div>
-	
+	</div>
+
 </body>
 </html>
