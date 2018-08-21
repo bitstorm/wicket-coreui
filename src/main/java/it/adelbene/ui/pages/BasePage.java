@@ -24,14 +24,11 @@ public class BasePage extends WebPage {
 	public static final CssResourceReference COREUI_CSS = new WebjarsCssResourceReference("startbootstrap-sb-admin/current/css/sb-admin.css");
 	
 	public static final JavaScriptResourceReference BOOTSTRAP_JS = new WebjarsJavaScriptResourceReference("startbootstrap-sb-admin/current/js/bootstrap.min.js");
-//	public static final JavaScriptResourceReference COREUI_JS = new WebjarsJavaScriptResourceReference("coreui__ajax/current/Static_Starter_GULP/src/js/app.js");
-//	public static final JavaScriptResourceReference CHART_JS = new WebjarsJavaScriptResourceReference("chartjs/current/Chart.min.js");
 	
 	@Override
 	public void renderHead(IHeaderResponse response) {
 		super.renderHead(response);
 		response.render(new PriorityHeaderItem(CssHeaderItem.forReference(BOOTSTRAP_CSS)));
-//		response.render(CssHeaderItem.forReference(SIMPLE_LINE_ICONS_CSS));
 		response.render(CssHeaderItem.forReference(FONT_AWESOME_CSS));
 		response.render(CssHeaderItem.forReference(COREUI_CSS));
 		
@@ -41,8 +38,6 @@ public class BasePage extends WebPage {
 		response.render(new PriorityHeaderItem(JavaScriptHeaderItem
 				.forReference(javaScriptSettings.getJQueryReference())));
 		response.render(new PriorityHeaderItem(JavaScriptHeaderItem.forReference(BOOTSTRAP_JS)));
-//		response.render(JavaScriptHeaderItem.forReference(CHART_JS));
-//		response.render(JavaScriptHeaderItem.forReference(COREUI_JS).setDefer(true));
 		
 	}
 }
