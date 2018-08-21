@@ -95,12 +95,28 @@
 			<artifactId>wicket-webjars</artifactId>
 			<version>2.0.2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>4.7.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
-			<artifactId>startbootstrap-sb-admin</artifactId>
-			<version>3.3.7</version>
+			<artifactId>coreui__ajax</artifactId>
+			<version>1.0.10</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>simple-line-icons</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		
+
 		<dependency>
 			<groupId>org.apache.dubbo</groupId>
 			<artifactId>dubbo</artifactId>
