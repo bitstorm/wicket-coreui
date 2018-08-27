@@ -6,7 +6,7 @@
 				var row = document.getElementById(rowId);
 				
 				if (row) {
-					updateTableRow(rowId, cellsData[2], cellsData[3]);
+					updateTableRow(rowId, cellsData);
 					return;
 				}
 				
@@ -20,19 +20,20 @@
 				
 				row.id = rowId;
 				
-				cellsData.forEach(function(element) {
+				for (var key in cellsData) {
 					var cell = row.insertCell(row.cells.length);
-					cell.innerHTML = element;
-				});
+					cell.innerHTML = cellsData[key];
+				}
 			}
 			
-			function updateTableRow(rowId, providers, consumers) {
+			function updateTableRow(rowId, cellsData) {
 				var row = document.getElementById(rowId);
-				var cell = row.cells[2];
-				cell.innerHTML = providers;
+				var rowCells = row.cells;
 				
-				var cell = row.cells[3];
-				cell.innerHTML = consumers;
+				rowCells.foreach(function (cell) {
+					var key = cell.headers;
+					cell.innerHTML = cellsData[key];
+				});
 			}
 		</script>
 	</wicket:head>
@@ -48,18 +49,18 @@
 						class="table table-responsive-sm table-bordered table-striped table-sm">
 						<thead>
 							<tr>
-								<th>Service</th>
-								<th>Application</th>
-								<th>Providers</th>
-								<th>Consumers</th>
+								<th id="name">Service</th>
+								<th id="application">Application</th>
+								<th id="providerCount">Providers</th>
+								<th id="consumerCount">Consumers</th>
 							</tr>
 						</thead>
 						<tbody wicket:id="listContainer">
 							<tr wicket:id="rows">
-								<td wicket:id="name"></td>
-								<td wicket:id="application"></td>
-								<td wicket:id="providerCount"></td>
-								<td wicket:id="consumerCount"></td>
+								<td wicket:id="name" headers="name"></td>
+								<td wicket:id="application" headers="application"></td>
+								<td wicket:id="providerCount" headers="providerCount"></td>
+								<td wicket:id="consumerCount" headers="consumerCount"></td>
 							</tr>
 						</tbody>
 					</table>

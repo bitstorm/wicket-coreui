@@ -19,12 +19,14 @@ public class TestHomePage {
 	private WicketTester tester;
 
 	@Before
-	public void setUp() {
+	public void setUp() 
+	{
 		tester = new WicketTester(new DubboAwsomeMonitorApp());
 	}
 
 	@Test
-	public void chartJsFactory() {
+	public void chartJsFactory() 
+	{
 
 		JSONObject data = new JSONObject().put("labels", new JSONArray(Arrays.asList("Red", "Green", "Yellow")))
 				.put("datasets", new JSONArray().put(new JSONObject().put("data", new JSONArray(Arrays.asList(300, 50, 100)))
