@@ -119,7 +119,7 @@
 	
 		<dependency>
 			<groupId>org.apache.dubbo</groupId>
-			<artifactId>dubbo</artifactId>
+			<artifactId>dubbo-common</artifactId>
 			<version>2.7.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>

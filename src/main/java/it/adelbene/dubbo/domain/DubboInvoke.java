@@ -15,7 +15,6 @@
  */
 package it.adelbene.dubbo.domain;
 
-import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -107,7 +106,7 @@ public class DubboInvoke implements Serializable {
     }
 
     public String getType() {
-        if (StringUtils.isEmpty(type)) {
+        if (type != null || type.isEmpty()) {
             return "provider";
         }
         return type;

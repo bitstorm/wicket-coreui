@@ -15,9 +15,10 @@
  */
 package it.adelbene.dubbo.domain;
 
-import com.alibaba.dubbo.common.status.Status;
 
 import java.io.Serializable;
+
+import org.apache.dubbo.common.status.Status;
 
 /**
  * @author Jinkai.Ma
